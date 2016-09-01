@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html ng-app="DateFormatter">
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+		<link rel="stylesheet" href="./app.css">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-aria.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-messages.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+		<script src="./app.js"></script>
+
+	</head>
+
+	<body ng-controller="MainController as controller" style="font-family: SFMono;">
+
+				import Foundation
+				</br>
+
+				let formatter = DateFormatter()
+				</br>
+
+				formatter.dateFormat = "<input type="text" ng-model="controller.formatContent" ng-model-options="{ debounce: 1000 }" ng-change="controller.formatContentDidChange()" />"
+				</br>
+				let string = formatter.string(from: Date())
+				</br>
+				print(string)
+				</br>
+				<span class="output">{{controller.stringFromDate}}</span>
+				</br>
+				let date = formatter.date(from: "<input type="text" ng-model="controller.stringContent" ng-model-options="{ debounce: 1000 }" ng-change="controller.stringContentDidChange()" />")
+				</br>
+				print(date)
+				</br>
+				<span class="output">{{controller.dateFromString}}</span>
+				</br>
+
+	</body>
+</html>

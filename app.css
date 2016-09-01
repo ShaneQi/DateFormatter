@@ -1,0 +1,31 @@
+@font-face {
+font-family: SFMono;
+	src: url(SFMono-Regular.otf);
+}
+
+body {
+	background-color: rgba(31,32,41,1);
+	color: white;
+	padding: 20px;
+}
+
+input {
+	margin: 0px;
+	padding: 0px;
+	font-family: SFMono;
+	border-width: 0px;
+	outline: none;
+	background: none;
+	text-align:center;
+	color: white;
+}
+
+span.output {
+	margin: 10px 0;
+	display: inline-block;
+	padding: 40px;
+	background-color: rgba(49,50,58,1);
+	border-radius: 10px;
+	width: 50%;
+	text-align: center;
+}
