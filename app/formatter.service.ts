@@ -10,7 +10,7 @@ export class FormatterService {
   toString(format: string): Observable<string> {
 		//return Observable.of<string>("123321");
     return this.http
-               .post(`https://server.shaneqi.com/datefromstring`, {"format": format})
+               .post(`https://server.shaneqi.com/stringfromdate`, JSON.stringify({format: format}))
                .map((r: Response) => r.json().date_string as string);
   }
 }
