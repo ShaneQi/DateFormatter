@@ -1,0 +1,7 @@
+.container {
+  background-color: rgba(31,32,41,1);
+  color: white;
+  padding: 20px;
+  line-height: 25px;
+  font-family: SFMono;
+}

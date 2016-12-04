@@ -1,0 +1,40 @@
+@font-face {
+  font-family: SFMono;
+  src: url(SFMono-Regular.otf);
+}
+
+input {
+  font-size: 16px;
+  margin: 0px;
+  padding: 0px;
+  font-family: SFMono;
+  border-width: 0px;
+  outline: none;
+  background: none;
+  text-align:center;
+  color: rgba(211,35,46,1);
+  background-color: rgba(255,255,255,0.05);
+  border-radius: 5px;
+}
+
+span.output {
+  margin: 10px 0;
+  display: inline-block;
+  padding: 30px;
+  background-color: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  width: 50%;
+  text-align: center;
+}
+
+span.hl-keyword {
+  color: rgba(215, 0, 143, 1);
+}
+
+span.hl-string {
+  color: rgba(211,35,46,1);
+}
+
+span.hl-class {
+  color: rgba(30,168,162,1);
+}
