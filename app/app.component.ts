@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable }        from 'rxjs/Observable';
-import { Subject }           from 'rxjs/Subject';
+import { BehaviorSubject }   from 'rxjs/BehaviorSubject';
 
 import { FormatterService } from './formatter.service';
-
-import 'rxjs/Rx';
+import { FormatResult } from './FormatResult';
 
 @Component({
   moduleId: module.id,
@@ -15,63 +13,43 @@ import 'rxjs/Rx';
 })
 export class AppComponent implements OnInit {
 
-  private formatContent = new Subject<string>();
-  private stringContent = new Subject<string>();
-
-  stringFromDate: Observable<string>;
-  dateFromString: Observable<string>;
+  private format = new BehaviorSubject("MMM. dd, yyyy HH:mm z");
+  private dateString = new BehaviorSubject("Dec. 06, 1991 09:41 CDT");
+	private formatResult = new FormatResult();
 
   constructor(
-    private formatterService: FormatterService) {}
+    private formatterService: FormatterService
+		) {}
 
-  toString(format: string): void {
-		this.formatContent.next(format);
-  }
+	setFormat(format: string) {
+		this.format.next(format);
+	}
 
-  toDate(stringContent: string): void {
-		this.stringContent.next(stringContent);
-  }
+	setDateString(dateString: string) {
+		this.dateString.next(dateString);
+	}
 
 	ngOnInit(): void {
-/*		this.stringFromDate = this.formatContent
-      .debounceTime(300)        // wait for 300ms pause in events
-      .distinctUntilChanged()   // ignore if next search term is same as previous
-      .switchMap(format => format   // switch to new observable each time
-        // return the http search observable
-        ? this.formatterService.toString(format)
-        // or the observable of empty heroes if no search term
-        : Observable.of<string>("nil"))
-      .catch(error => {
-        // TODO: real error handling
-        console.log(error);
-        return Observable.of<string>("nil");
-      });
-*/
-			this.dateFromString = Observable.zip(this.stringContent, this.formatContent)
-      .debounceTime(300)        // wait for 300ms pause in events
-			.map(x=> {
-				console.log("0: "+x[0]);
-				console.log("1: "+x[1]);
-				return x;
-			})
-      .switchMap(arr => arr   // switch to new observable each time
-        // return the http search observable
-        ? this.formatterService.toDate(arr[0], arr[1])
-        // or the observable of empty heroes if no search term
-        : Observable.of<string>("nil"))
-      .catch(error => {
-        // TODO: real error handling
-        console.log(error);
-        return Observable.of<string>("nil");
-      });
+		this.format
+      .debounceTime(300)
+      .distinctUntilChanged()
+			.subscribe(format => {
+				this.formatterService
+					.format(this.format.getValue(), this.dateString.getValue())
+					.subscribe(r=>this.formatResult = r);
+			});
 
+		this.dateString
+      .debounceTime(300)
+      .distinctUntilChanged()
+			.subscribe(format => {
+				this.formatterService
+					.format(this.format.getValue(), this.dateString.getValue())
+					.subscribe(r=>this.formatResult = r);
+			});
+
+		(<HTMLInputElement>document.getElementById("format_input")).value = this.format.getValue();
+		(<HTMLInputElement>document.getElementById("date_string_input")).value = this.dateString.getValue();
 	}
 
 }
-
-
-/*
-Copyright 2016 Google Inc. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
-*/
