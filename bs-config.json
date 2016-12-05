@@ -1,6 +1,7 @@
 {
   "port": 8888,
   "ui": false,
-  "open": false
+  "open": false,
+	"notify": false
 }
 
