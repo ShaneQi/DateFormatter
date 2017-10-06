@@ -1,25 +1,45 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>DateFormatter - Play with Swift DateFormatter online. </title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./styles.css">
 
-    <!-- Polyfill(s) for older browsers -->
-    <script src="node_modules/core-js/client/shim.min.js"></script>
+<head>
+  <title>DateFormatter - Play with Swift DateFormatter online. </title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+  <script src="./app.js"></script>
+</head>
 
-    <script src="node_modules/zone.js/dist/zone.js"></script>
-    <script src="node_modules/reflect-metadata/Reflect.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
+<body class="container" ng-app="DateFormatterPlayground" ng-controller="MainController as controller">
+  <span class="hl-keyword">import</span> Foundation
+  <br>
+  <span class="hl-keyword">let</span> formatter =
+  <span class="hl-class">DateFormatter</span>()
+  <br>
+  <span class="hl-class">formatter</span>.
+  <span class="hl-class">dateFormat</span> =
+  <span class="hl-string">"
+    <input size="40px" type="text" ng-model="controller.format" ng-model-options="{ debounce: 1000 }" ng-change="controller.post()" />"</span>
+  <br>
+  <span class="hl-keyword">let</span> string =
+  <span class="hl-class">formatter</span>.
+  <span class="hl-class">string</span>(from:
+  <span class="hl-class">Date</span>())
+  <br>
+  <span class="hl-class">print</span>(<span class="hl-class">string</span>)
+  <br>
+  <span class="output">{{dateString}}</span>
+  <br>
+  <span class="hl-keyword">let</span> date =
+  <span class="hl-class">formatter</span>.
+  <span class="hl-class">date</span>(from:
+  <span class="hl-string">"
+    <input size="40px" type="text" ng-model-options="{ debounce: 1000 }" ng-change="controller.post()" ng-model="controller.dateStringInput" />"</span>)
+  <br>
+  <span class="hl-class">print</span>(<span class="hl-class">date</span>)
+  <br>
+  <span class="output">{{dateValue}}</span>
+  <br>
 
-    <script src="systemjs.config.js"></script>
-    <script>
-      System.import('app').catch(function(err){ console.error(err); });
-    </script>
-  </head>
+</body>
 
-  <body class="container">
-    <my-app>Loading...</my-app>
-  </body>
 </html>
